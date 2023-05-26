@@ -9,6 +9,7 @@ specifiers:
   postcss: 8.4.23
   react: 18.2.0
   react-dom: 18.2.0
+  react-select-async-paginate: ^0.7.2
   tailwindcss: 3.3.2
   typescript: 5.0.4
 
@@ -21,6 +22,7 @@ dependencies:
   postcss: 8.4.23
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-select-async-paginate: 0.7.2_react@18.2.0
   tailwindcss: 3.3.2
   typescript: 5.0.4
 
@@ -171,6 +173,10 @@ packages:
       fastq: 1.15.0
     dev: false
 
+  /@seznam/compose-react-refs/1.0.6:
+    resolution: {integrity: sha512-izzOXQfeQLonzrIQb8u6LQ8dk+ymz3WXTIXjvOlTXHq6sbzROg3NWU+9TTAOpEoK9Bth24/6F/XrfHJ5yR5n6Q==}
+    dev: false
+
   /@swc/helpers/0.5.1:
     resolution: {integrity: sha512-sJ902EfIzn1Fa+qYmjdQqh8tPsoxyBz+8yBKC2HKUxyezKJFwPGOn7pv4WY6QuQW//ySQi5lJjA/ZT9sNWWNTg==}
     dependencies:
@@ -201,6 +207,14 @@ packages:
 
   /@types/scheduler/0.16.3:
     resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
+    dev: false
+
+  /@vtaits/use-lazy-ref/0.1.0_react@18.2.0:
+    resolution: {integrity: sha512-/m5z3Df6I6i/B0lnv6pB2O1+X/nWVquqbnltq+irW1+Nhpv0PpeMzSNf9lTjzT/eHRZtH2fM1370AdYqc3FTyQ==}
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /any-promise/1.3.0:
@@ -711,6 +725,19 @@ packages:
       scheduler: 0.23.0
     dev: false
 
+  /react-select-async-paginate/0.7.2_react@18.2.0:
+    resolution: {integrity: sha512-NlF717+Kh/OgSC7YyEYuB0ebsqF2YhyEdcETH1lX6X4INgNKpKH269MI1H5soIThZdCPZl5xz2QSldcPKlPlew==}
+    peerDependencies:
+      react: ^16.14.0 || ^17.0.0 || ^18.0.0
+      react-select: ^5.0.0
+    dependencies:
+      '@seznam/compose-react-refs': 1.0.6
+      '@vtaits/use-lazy-ref': 0.1.0_react@18.2.0
+      react: 18.2.0
+      sleep-promise: 9.1.0
+      use-is-mounted-ref: 1.5.0_react@18.2.0
+    dev: false
+
   /react/18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
     engines: {node: '>=0.10.0'}
@@ -755,6 +782,10 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
+
+  /sleep-promise/9.1.0:
+    resolution: {integrity: sha512-UHYzVpz9Xn8b+jikYSD6bqvf754xL2uBUzDFwiU6NcdZeifPr6UfgU43xpkPu67VMS88+TI2PSI7Eohgqf2fKA==}
     dev: false
 
   /source-map-js/1.0.2:
@@ -878,6 +909,14 @@ packages:
       browserslist: 4.21.5
       escalade: 3.1.1
       picocolors: 1.0.0
+    dev: false
+
+  /use-is-mounted-ref/1.5.0_react@18.2.0:
+    resolution: {integrity: sha512-p5FksHf/ospZUr5KU9ese6u3jp9fzvZ3wuSb50i0y6fdONaHWgmOqQtxR/PUcwi6hnhQDbNxWSg3eTK3N6m+dg==}
+    peerDependencies:
+      react: '>=16.0.0'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /util-deprecate/1.0.2:
