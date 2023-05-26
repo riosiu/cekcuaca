@@ -32,25 +32,6 @@ const SearchWeather: React.FC<SearchProps> = ({ onSearchChange }) => {
         onSearchChange(e)
     }
 
-    // const loadOptions: LoadOptions<string, GroupBase<string>, { page: any }> = async (inputvalue: string) => {
-    //     return fetch(`${API_URL}/cities?minPopulation=1000000&namePrefix=${inputvalue}`).then(
-    //         (res) => res.json()
-    //     ).
-    //         then((res) => {
-    //             return {
-    //                 options: res.data.map((city: CityResponse) => ({
-    //                     value: `${city.latitude} ${city.longitude}`,
-    //                     label: `${city.name} , ${city.country}`
-    //                 })),
-    //                 hasMore: res.hasMore,
-    //                 additional: {
-    //                     page: res.page
-    //                 }
-    //             }
-    //         }).catch((err) => {
-    //             console.error(err)
-    //         })
-    // }
 
     const loadOptions: LoadOptions<string, any, { page: any }> = async (inputValue) => {
         try {
