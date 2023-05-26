@@ -1,12 +1,11 @@
+"use client"
 import React, { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import "./App.css";
-import Search from "../components/search_weather";
 import Layout from "../components/layout";
 import { WEATHER_API, WEATHER_URL } from "../utils/api";
+import SearchWeather from "../components/search_weather";
 
 interface SearchProps {
-  onSearchChange: (e: { value: string; label: string } | null) => void;
+  onSearchChange: (event: { value: string; label: string } | null | any) => void;
 }
 
 
@@ -15,13 +14,13 @@ function App() {
   const [forecastWeather, setForecastWeather] = useState<any>(null);
   const [count, setCount] = useState(0);
 
-  const handleOnSearchChange: SearchProps["onSearchChange"] = (e) => {
-    console.log(e);
-    if (typeof e === "string" || e === null) {
+  const handleOnSearchChange: SearchProps["onSearchChange"] = (event) => {
+    // console.log(e);
+    if (typeof event === "string" || event === null) {
       setCurrentWeather(null);
       setForecastWeather(null);
     } else {
-      const [lat, lon] = e.value.split(" ");
+      const [lat, lon] = event.value.split(" ");
 
       const fetchCurrentWeather = fetch(
         `${WEATHER_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API}&units=metric`
@@ -36,8 +35,8 @@ function App() {
           const responseWeather = await response[0].json();
           const responseForecast = await response[1].json();
 
-          setCurrentWeather({ city: e.label, ...responseWeather });
-          setForecastWeather({ city: e.label, ...responseForecast });
+          setCurrentWeather({ city: event.label, ...responseWeather });
+          setForecastWeather({ city: event.label, ...responseForecast });
         })
         .catch((err) => console.error(err));
     }
@@ -48,7 +47,7 @@ function App() {
   return (
     <Layout>
       <div>
-        <Search onSearchChange={handleOnSearchChange} />
+        <SearchWeather onSearchChange={handleOnSearchChange} />
         {/* {currentWeather && <CurrentWeather data={currentWeather} />}
         {forecastWeather && <ForecastWeather data={forecastWeather} />} */}
       </div>
@@ -56,4 +55,8 @@ function App() {
   );
 }
 
+
+// const renderingApp = () => {
+//   useClient()
+// }
 export default App;

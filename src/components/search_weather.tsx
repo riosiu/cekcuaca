@@ -1,70 +1,108 @@
-import { API_URL } from '@/utils/api'
+import { API_URL, getApi } from '@/utils/api'
 import React from 'react'
-import {AsyncPaginate} from 'react-select-async-paginate'
-type CityOption =  {
-    value : string,
-    onChange : (e:string) => void
+import { GroupBase } from 'react-select'
+import { LoadOptions } from 'react-select-async-paginate'
+import { AsyncPaginate } from 'react-select-async-paginate'
+import { JsxElement } from 'typescript'
+type CityOption = {
+    value: string,
+    onChange: (e: string) => void
 }
 
-interface SearchProps  {
-    onSearchChange : (e:string | null) => void
+interface SearchProps {
+    onSearchChange: (event: { value: string; label: string } | null | any) => void
+
+}
+interface SearchItems {
+    value: string,
+    label: string
 }
 
-type CityResponse ={
-    latitude : string,
-    longitude : string,
-    name : string,
-    country : string,
+type CityResponse = {
+    latitude: string,
+    longitude: string,
+    name: string,
+    country: string,
 }
 
-const SearchWeather : React.FC<SearchProps> = ({onSearchChange} ) => {
-    const [search, setSearch] = React.useState('')
-    const handleSearch = (e:string) => {
+const SearchWeather: React.FC<SearchProps> = ({ onSearchChange }) => {
+    const [search, setSearch] = React.useState<string | null>('')
+    const handleSearch = (e: string | null) => {
         setSearch(e)
         onSearchChange(e)
     }
 
-    const loadOptions = (inputvalue : string) =>{
-        return fetch(`${API_URL}/cities?minPopulation=1000000&namePrefix=${inputvalue}`).then(
-            (res) => res.json()
-        ).
-        then((res) => {
+    // const loadOptions: LoadOptions<string, GroupBase<string>, { page: any }> = async (inputvalue: string) => {
+    //     return fetch(`${API_URL}/cities?minPopulation=1000000&namePrefix=${inputvalue}`).then(
+    //         (res) => res.json()
+    //     ).
+    //         then((res) => {
+    //             return {
+    //                 options: res.data.map((city: CityResponse) => ({
+    //                     value: `${city.latitude} ${city.longitude}`,
+    //                     label: `${city.name} , ${city.country}`
+    //                 })),
+    //                 hasMore: res.hasMore,
+    //                 additional: {
+    //                     page: res.page
+    //                 }
+    //             }
+    //         }).catch((err) => {
+    //             console.error(err)
+    //         })
+    // }
+
+    const loadOptions: LoadOptions<string, any, { page: any }> = async (inputValue) => {
+        try {
+            const response = await fetch(
+                `${API_URL}/cities?minPopulation=1000000&namePrefix=${inputValue}`, getApi
+            );
+
+            const data = await response.json();
+
             return {
-                options : res.data.map((city : CityResponse) =>({
-                    value : `${city.latitude} ${city.longitude}`,
-                    label : `${city.name} , ${city.country}`
+                options: data.data.map((city: any) => ({
+                    value: `${city.latitude} ${city.longitude}`,
+                    label: `${city.name}, ${city.country}`,
                 })),
-                hasMore : res.hasMore,
-                additional : {
-                    page : res.page
-                } 
-            }
-        }).catch((err) => {
-            console.error(err)
-        })
-    }    
+                hasMore: data.hasMore,
+                additional: {
+                    page: data.page,
+                },
+            };
+        } catch (error) {
+            console.error(error);
+            return {
+                options: [],
+                hasMore: false,
+                additional: {
+                    page: null,
+                },
+            };
+        }
+    };
+
 
     return (
         <>
             <div>
-            <>
-      <div className="flex items-center gap-4 flex-col">
-        <h1 className="text-2xl mt-3">Cuaca Hari ini?</h1>
-        <form action="" className="flex flex-row gap-3">
-          <AsyncPaginate
-            onChange={handleSearch}
-            className="rounded-xl outline-none p-2 text-black font-nunito"
-            type="text"
-            debounceTimeout={600}
-            value={search}
-            loadOptions={loadOptions}
-            placeholder="search city..."
-          />
+                <>
+                    <div className="flex items-center gap-4 flex-col">
+                        <h1 className="text-2xl mt-3">Cuaca Hari ini?</h1>
+                        <form action="" className="flex flex-row gap-3">
+                            <AsyncPaginate
+                                onChange={handleSearch}
+                                className="rounded-xl outline-none p-2 text-black font-nunito"
+                                debounceTimeout={600}
+                                value={search}
+                                loadOptions={loadOptions}
+                                placeholder="search city..."
+                            />
 
-          <button>Search</button>
-        </form>
-      </div>
-    </>
+                            <button>Search</button>
+                        </form>
+                    </div>
+                </>
             </div>
         </>
     )
