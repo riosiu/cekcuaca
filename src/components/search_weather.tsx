@@ -80,7 +80,7 @@ const SearchWeather: React.FC<SearchProps> = ({ onSearchChange }) => {
                                 placeholder="search city..."
                             />
 
-                            <button>Search</button>
+                            {/* <button onClick={handleSearch}>Search</button> */}
                         </form>
                     </div>
                 </>
