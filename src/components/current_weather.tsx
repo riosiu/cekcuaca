@@ -1,70 +1,86 @@
-import React from "react";
-
-
+import React, { useEffect } from "react";
+import {
+  WiBarometer,
+  WiCelsius,
+  WiHumidity,
+  WiStrongWind,
+  WiUmbrella,
+} from "react-icons/wi";
 interface CurrentWeatherProps {
-    city: string,
-    weather: {
-        description: string,
-        icon: string,
-    }[],
-    main: {
-        temp: number,
-        feels_like: number,
-        humidity: number,
-        pressure: number,
-    }
-    wind: {
-        speed: number,
-    }
+  city: string;
+  weather: {
+    description: string;
+    icon: string;
+  }[];
+  main: {
+    temp: number;
+    feels_like: number;
+    humidity: number;
+    pressure: number;
+  };
+  wind: {
+    speed: number;
+  };
 }
 
 interface MyComponentProps {
-    data: CurrentWeatherProps
+  data: CurrentWeatherProps;
 }
 const CurrentWeather: React.FC<MyComponentProps> = ({ data }) => {
-    return (
-        <>
-            <div className="flex flex-col gap-10  px-5 pt-0 pb-5 bg-card p-2 mx-auto mt-6 mb-0 w-96 rounded-xl  ">
-                <div className="flex-row-reverse flex gap-8 mt-4 text-center">
-                    <div className="flex flex-col gap-1 justify-center">
-                        <h1 className="text-lg font-bold ">{data.city}</h1>
-                        <p>{data.weather[0].description}</p>
-                    </div>
-                    <div className="flex justify-center flex-col items-center gap-5 ">
-                        <img
-                            alt="weather"
-                            className="p-2"
-                            src={`/icons/${data.weather[0].icon}.png`}
-                        />
-                    </div>
-                </div>
-                <div className="flex justify-between mx-7 font-bold items-center text-sm flex-row">
-                    <p className="text-5xl ">{`${Math.round(data.main.temp)}`}°C</p>
-                    <div className="flex flex-col">
-                        <div className="flex justify-between">
-                            <p>Label</p>
-                        </div>
-                        <div className="flex justify-between">
-                            <p>Feels Like :</p>
-                            <p>{`${Math.round(data.main.feels_like)}°C`}</p>
-                        </div>
-                        <div className="flex justify-between">
-                            <p>Wind :</p>
-                            <p>{`${data.wind.speed} m/s`}</p>
-                        </div>
-                        <div className="flex justify-between">
-                            <p>Humidity :</p>
-                            <p>{`${data.main.humidity}%`}</p>
-                        </div>
-                        <div className="flex justify-between">
-                            <p>Preasure :</p>
-                            <p>{`${data.main.pressure} hPa`}</p>
-                        </div>
-                    </div>
-                </div>
+  useEffect(() => {
+    console.log(data);
+  });
+  return (
+    <>
+      <div
+        data-theme="dark"
+        className="card flex flex-col gap-10  px-5 pt-0 pb-5 bg-card p-2 mx-auto mt-6 mb-0 w-96 rounded-xl  "
+      >
+        <div className="flex flex-row justify-between mx-3 mt-7">
+          <span className=" text-sm font-bold ">
+            {data.city.substring(0, data.city.indexOf(","))} <br />
+            {data.city.substring(data.city.indexOf(",") + 1)}
+          </span>
+          <span className="text-3xl ">{`${Math.round(data.main.temp)}`}°C</span>
+        </div>
+        <div className="flex-col flex items-center">
+          <img
+            alt="weather"
+            className="w-60 items-center flex"
+            src={`/icons/${data.weather[0].icon}.png`}
+          />
+        </div>
+        <div className="flex mx-2 font-bold card items-center text-sm flex-row">
+          <div className="flex flex-row gap-3">
+            <div className="flex flex-col items-center gap-4 p-1 hover:bg-slate-800 hover:rounded-xl">
+              <WiUmbrella size={50} />
+              <span className="text-xs text-center">
+                {data.weather[0].description}
+              </span>
             </div>
-        </>
-    );
+            <div className="flex flex-col items-center gap-4 p-1 hover:bg-slate-800 hover:rounded-xl">
+              <WiCelsius size={50} />
+              <span className="text-xs text-center">{`${Math.round(
+                data.main.feels_like
+              )}°C`}</span>
+            </div>
+            <div className="flex flex-col items-center gap-4 p-1 hover:bg-slate-800 hover:rounded-xl">
+              <WiBarometer size={50} />
+              <span className="text-xs text-center">{`${data.wind.speed} m/s`}</span>
+            </div>
+            <div className="flex flex-col items-center gap-4 p-1 hover:bg-slate-800 hover:rounded-xl">
+              <WiHumidity size={50} />
+              <span className="text-xs text-center">{`${data.main.humidity}%`}</span>
+            </div>
+            <div className="flex flex-col items-center gap-4 p-1 hover:bg-slate-800 hover:rounded-xl">
+              <WiStrongWind size={50} />
+              <span className="text-xs text-center">{`${data.main.pressure} hPa`}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default CurrentWeather;

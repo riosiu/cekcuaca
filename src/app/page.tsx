@@ -1,15 +1,15 @@
-"use client"
+"use client";
 import React, { useState } from "react";
-import Layout from "../components/layout";
 import { WEATHER_API, WEATHER_URL } from "../utils/api";
 import SearchWeather from "../components/search_weather";
 import CurrentWeather from "@/components/current_weather";
 import { ForecastWeather } from "@/components/forecast_weather";
 
 interface SearchProps {
-  onSearchChange: (event: { value: string; label: string } | null | any) => void;
+  onSearchChange: (
+    event: { value: string; label: string } | null | any
+  ) => void;
 }
-
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState<any>(null);
@@ -47,16 +47,15 @@ function App() {
   //console.log(forecastWeather);
 
   return (
-    <Layout>
+    <>
       <div>
         <SearchWeather onSearchChange={handleOnSearchChange} />
         {currentWeather && <CurrentWeather data={currentWeather} />}
         {forecastWeather && <ForecastWeather data={forecastWeather} />}
       </div>
-    </Layout>
+    </>
   );
 }
-
 
 // const renderingApp = () => {
 //   useClient()
