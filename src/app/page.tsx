@@ -48,11 +48,9 @@ function App() {
 
   return (
     <>
-      <div>
-        <SearchWeather onSearchChange={handleOnSearchChange} />
-        {currentWeather && <CurrentWeather data={currentWeather} />}
-        {forecastWeather && <ForecastWeather data={forecastWeather} />}
-      </div>
+      <SearchWeather onSearchChange={handleOnSearchChange} />
+      {currentWeather && <CurrentWeather data={currentWeather} />}
+      {forecastWeather && <ForecastWeather data={forecastWeather} />}
     </>
   );
 }

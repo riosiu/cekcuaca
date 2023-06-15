@@ -32,10 +32,7 @@ const CurrentWeather: React.FC<MyComponentProps> = ({ data }) => {
   });
   return (
     <>
-      <div
-        data-theme="dark"
-        className="card flex flex-col gap-10  px-5 pt-0 pb-5 bg-card p-2 mx-auto mt-6 mb-0 w-96 rounded-xl  "
-      >
+      <div className="card flex flex-col gap-10  px-5 pt-0 pb-5 bg-card p-2 mx-auto mt-6 mb-0 w-96 rounded-xl  ">
         <div className="flex flex-row justify-between mx-3 mt-7">
           <span className=" text-sm font-bold ">
             {data.city.substring(0, data.city.indexOf(","))} <br />
@@ -51,7 +48,7 @@ const CurrentWeather: React.FC<MyComponentProps> = ({ data }) => {
           />
         </div>
         <div className="flex mx-2 font-bold card items-center text-sm flex-row">
-          <div className="flex flex-row gap-3">
+          <div className="flex flex-row gap-1">
             <div className="flex flex-col items-center gap-4 p-1 hover:bg-slate-800 hover:rounded-xl">
               <WiUmbrella size={50} />
               <span className="text-xs text-center">
